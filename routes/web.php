@@ -17,8 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
-    return view('welcome');
+    if(count(session()->all()) > 3){
+        $logado = true;
+    }
+    else{
+        $logado = false;
+    }
+    $this->logado = $logado;
+    return view('welcome', ['logado' => $logado]);
 });
 
 Route::get('/create', [usuarioController::class, 'create']);
